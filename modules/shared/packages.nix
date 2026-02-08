@@ -17,6 +17,7 @@ with pkgs; [
   # Encryption and security tools
   age
   gnupg
+  git-crypt
 
   # Cloud-related tools and SDKs
   # docker

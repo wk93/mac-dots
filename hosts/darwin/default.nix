@@ -4,6 +4,7 @@ let user = "wojtek"; in
 
 {
   imports = [
+    ../../modules/darwin/fonts.nix
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
   ];
