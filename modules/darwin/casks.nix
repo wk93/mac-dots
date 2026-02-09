@@ -12,6 +12,9 @@ _:
   # Productivity Tools
   # "raycast"
 
+  # Cloud Tools
+  "dropbox"
+
   # Browsers
   # "google-chrome"
   "brave-browser"
