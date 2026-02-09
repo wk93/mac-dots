@@ -72,6 +72,21 @@ end
 nmap_leader('fb', function() Snacks.picker.buffers() end, 'Buffers')
 nmap_leader('ff', function() Snacks.picker.git_files() end, 'Files')
 nmap_leader('fg', function() Snacks.picker.grep() end, 'Grep live')
+
+---- lsp
+nmap("gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
+nmap("gD", function() Snacks.picker.lsp_declarations() end, "Goto Declaration")
+nmap("gr", function() Snacks.picker.lsp_references() end, "References")
+nmap("gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
+
+nmap("gy", function() Snacks.picker.lsp_type_definitions() end, "Goto T[y]pe Definition")
+nmap("gai", function() Snacks.picker.lsp_incoming_calls() end, "C[a]lls Incoming")
+nmap("gao", function() Snacks.picker.lsp_outgoing_calls() end,"C[a]lls Outgoing")
+
+nmap_leader("ss", function() Snacks.picker.lsp_symbols() end, "LSP Symbols")
+nmap_leader("sS", function() Snacks.picker.lsp_workspace_symbols() end, "LSP Workspace Symbols") 
+----lsp
+
 ---- snacks picker
 
 imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
