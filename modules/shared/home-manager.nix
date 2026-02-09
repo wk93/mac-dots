@@ -223,9 +223,9 @@ let name = "Wojciech Kania";
       yank
       prefix-highlight
       {
-        plugin = power-theme;
+        plugin = catppuccin;
         extraConfig = ''
-           set -g @tmux_power_theme 'gold'
+	   set -g @catppuccin_flavor 'macchiato'
         '';
       }
       {
