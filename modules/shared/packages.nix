@@ -1,5 +1,4 @@
-{ pkgs }:
-
+{pkgs}:
 with pkgs; [
   # General packages for development and system management
   alacritty
@@ -45,7 +44,7 @@ with pkgs; [
   tmux
   unzip
   # zsh-powerlevel10k
-  
+
   # Development tools
   curl
   gh
@@ -55,7 +54,7 @@ with pkgs; [
   lazygit
   fzf
   direnv
-  
+
   # Programming languages and runtimes
   bun
   # go
@@ -66,6 +65,7 @@ with pkgs; [
   # LSP
   vtsls
   prettierd
+  lua-language-server
   stylua
   alejandra
 
