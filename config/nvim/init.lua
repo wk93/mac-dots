@@ -32,6 +32,12 @@ vim.o.relativenumber = true
 vim.cmd.colorscheme("catppuccin-macchiato")
 -- nvim config
 
+-- lsp config
+vim.lsp.enable({
+	"vtsls"
+})
+-- lsp config
+
 -- keymaps
 local nmap = function(lhs, rhs, desc)
   -- See `:h vim.keymap.set()`

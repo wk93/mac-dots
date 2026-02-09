@@ -63,6 +63,9 @@ with pkgs; [
   # cargo
   # openjdk
 
+  # LSP
+  vtsls
+
   # Python packages
   # python3
   # virtualenv
