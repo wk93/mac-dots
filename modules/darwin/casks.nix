@@ -20,6 +20,7 @@ _:
   "brave-browser"
 
   # Communication Tools - Examples (uncomment as needed)
+  "readdle-spark"
   # "discord"
   # "notion"
   # "slack"
