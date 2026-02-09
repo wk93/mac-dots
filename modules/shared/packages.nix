@@ -65,6 +65,9 @@ with pkgs; [
 
   # LSP
   vtsls
+  prettierd
+  stylua
+  alejandra
 
   # Python packages
   # python3
