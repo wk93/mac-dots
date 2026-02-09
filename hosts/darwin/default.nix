@@ -6,6 +6,7 @@ let user = "wojtek"; in
   imports = [
     ../../modules/darwin/fonts.nix
     ../../modules/darwin/home-manager.nix
+    ../../modules/darwin/keyboard-remap.nix
     ../../modules/shared
   ];
 
@@ -20,6 +21,11 @@ let user = "wojtek"; in
     checks.verifyNixPath = false;
     primaryUser = user;
     stateVersion = 5;
+
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
 
     defaults = {
       NSGlobalDomain = {
