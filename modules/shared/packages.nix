@@ -57,6 +57,7 @@ with pkgs; [
   direnv
   
   # Programming languages and runtimes
+  bun
   # go
   # rustc
   # cargo
