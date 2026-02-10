@@ -1,11 +1,14 @@
-{ config, pkgs, lib, home-manager, ... }:
-
-let
-  user = "wojtek";
-in
 {
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}: let
+  user = "wojtek";
+in {
   imports = [
-   ./dock
+    ./dock
   ];
 
   # It me
@@ -39,7 +42,12 @@ in
   # Enable home-manager
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }:{
+    users.${user} = {
+      pkgs,
+      config,
+      lib,
+      ...
+    }: {
       imports = [
         ./symlinks.nix
       ];
@@ -48,7 +56,10 @@ in
         packages = pkgs.callPackage ./packages.nix {};
         stateVersion = "23.11";
       };
-      programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
+      home.sessionVariables = {
+        CHROME_EXECUTABLE = "/Applications/Chromium.app/Contents/MacOS/Chromium";
+      };
+      programs = {} // import ../shared/home-manager.nix {inherit config pkgs lib;};
 
       # Marked broken Oct 20, 2022 check later to remove this
       # https://github.com/nix-community/home-manager/issues/3344
@@ -61,12 +72,12 @@ in
     enable = true;
     username = user;
     entries = [
-      { path = "/Applications/Brave Browser.app/"; }
-      { path = "/System/Applications/Messages.app/"; }
-      { path = "/Applications/Ghostty.app/"; }
+      {path = "/Applications/Brave Browser.app/";}
+      {path = "/System/Applications/Messages.app/";}
+      {path = "/Applications/Ghostty.app/";}
       # { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "/Applications/Spotify.app/"; }
-      { path = "/System/Applications/System Settings.app/"; }
+      {path = "/Applications/Spotify.app/";}
+      {path = "/System/Applications/System Settings.app/";}
       {
         path = "${config.users.users.${user}.home}/Downloads";
         section = "others";
@@ -74,5 +85,4 @@ in
       }
     ];
   };
-
 }

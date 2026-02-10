@@ -57,6 +57,7 @@ with pkgs; [
 
   # Programming languages and runtimes
   bun
+  cocoapods
   # go
   # rustc
   # cargo
