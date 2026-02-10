@@ -25,6 +25,10 @@ add({ source = "catppuccin/nvim", name = "catppuccin" })
 add({ source = "folke/snacks.nvim", name = "snacks" })
 add({ source = "stevearc/conform.nvim", name = "conform" })
 add({ source = "folke/trouble.nvim", name = "trouble" })
+
+add({ source = "nvim-lua/plenary.nvim", name = "plenary" })
+add({ source = "stevearc/dressing.nvim", name = "dressing" })
+add({ source = "nvim-flutter/flutter-tools.nvim", name = "flutter-tools" })
 -- mini deps
 
 -- nvim config
@@ -67,6 +71,66 @@ vim.lsp.enable({
 	"lua_ls",
 })
 -- lsp config
+-- flutter tools
+require("flutter-tools").setup({
+	flutter_path = vim.fn.exepath("flutter"),
+	ui = {
+		notification_style = "native",
+	},
+
+	decorations = {
+		statusline = {
+			app_version = false,
+			device = true,
+			project_config = false,
+		},
+	},
+
+	flutter_path = "flutter",
+	fvm = false,
+
+	widget_guides = { enabled = false },
+	closing_tags = {
+		highlight = "Comment",
+		prefix = "» ",
+		enabled = true,
+	},
+
+	dev_log = {
+		enabled = true,
+		open_cmd = "tabedit",
+	},
+
+	outline = {
+		open_cmd = "30vnew",
+		auto_open = false,
+	},
+
+	lsp = {
+		color = {
+			enabled = true,
+			background = false,
+			foreground = false,
+			virtual_text = true,
+			virtual_text_str = "■",
+		},
+
+		capabilities = require("user.lsp").make_client_capabilities(),
+
+		settings = {
+			showTodos = true,
+			completeFunctionCalls = true,
+			renameFilesWithClasses = "always",
+			enableSdkFormatter = true,
+			analysisExcludedFolders = {
+				vim.fn.expand("$HOME/.pub-cache"),
+				"**/.dart_tool/**",
+				"**/build/**",
+			},
+		},
+	},
+})
+-- flutter tools
 
 -- formatting
 require("conform").setup({
@@ -83,6 +147,8 @@ require("conform").setup({
 		html = { "prettierd" },
 		css = { "prettierd" },
 		markdown = { "prettierd" },
+
+		dart = { "dart_format" },
 	},
 	default_format_opts = {
 		lsp_format = "fallback",
@@ -174,7 +240,6 @@ nmap("[e", function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, "Prev error")
 
--- show float on demand (optional, lepsze niż zawsze CursorHold)
 nmap("gl", function()
 	vim.diagnostic.open_float(nil, {
 		focus = false,
@@ -206,4 +271,16 @@ nmap("[t", function()
 	require("trouble").prev({ skip_groups = true, jump = true })
 end, "Trouble: Prev")
 
+-- Flutter
+nmap_leader("fr", "<Cmd>FlutterRun<CR>", "Flutter: Run")
+nmap_leader("fR", "<Cmd>FlutterRestart<CR>", "Flutter: Restart")
+nmap_leader("fl", "<Cmd>FlutterReload<CR>", "Flutter: Reload")
+nmap_leader("fq", "<Cmd>FlutterQuit<CR>", "Flutter: Quit")
+
+nmap_leader("fd", "<Cmd>FlutterDevices<CR>", "Flutter: Devices")
+nmap_leader("fe", "<Cmd>FlutterEmulators<CR>", "Flutter: Emulators")
+
+nmap_leader("fo", "<Cmd>FlutterOutlineToggle<CR>", "Flutter: Outline")
+nmap_leader("fL", "<Cmd>FlutterLogToggle<CR>", "Flutter: Log")
+nmap_leader("ft", "<Cmd>FlutterDevTools<CR>", "Flutter: DevTools")
 -- keymaps
