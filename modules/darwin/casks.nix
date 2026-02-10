@@ -22,10 +22,10 @@ _: [
 
   # Communication Tools - Examples (uncomment as needed)
   "readdle-spark"
+  "telegram"
   # "discord"
   # "notion"
   # "slack"
-  # "telegram"
   # "zoom"
 
   # Utility Tools - Examples (uncomment as needed)
