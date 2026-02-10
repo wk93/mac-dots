@@ -24,6 +24,7 @@ local add = MiniDeps.add
 add({ source = "catppuccin/nvim", name = "catppuccin" })
 add({ source = "folke/snacks.nvim", name = "snacks" })
 add({ source = "stevearc/conform.nvim", name = "conform" })
+add({ source = "folke/trouble.nvim", name = "trouble" })
 -- mini deps
 
 -- nvim config
@@ -40,6 +41,8 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 
 vim.cmd.colorscheme("catppuccin-macchiato")
+
+vim.opt.updatetime = 300
 -- nvim config
 
 -- completion
@@ -92,6 +95,10 @@ require("conform").setup({
 })
 
 -- formatting
+
+-- errors
+require("trouble").setup()
+-- errors
 
 -- keymaps
 local nmap = function(lhs, rhs, desc)
@@ -151,7 +158,52 @@ end, "LSP Workspace Symbols")
 ----lsp
 
 ---- snacks picker
-
 imap_expr("<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
+---- snacks picker
+
+-- diagnostics nav (native)
+nmap("]d", vim.diagnostic.goto_next, "Next diagnostic")
+nmap("[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+
+nmap("]e", function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, "Next error")
+
+nmap("[e", function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, "Prev error")
+
+-- show float on demand (optional, lepsze niż zawsze CursorHold)
+nmap("gl", function()
+	vim.diagnostic.open_float(nil, {
+		focus = false,
+		scope = "cursor",
+		border = "rounded",
+		source = "if_many",
+	})
+end, "Line diagnostics")
+
+-- trouble
+nmap_leader("xx", function()
+	require("trouble").toggle()
+end, "Trouble: Toggle")
+
+nmap_leader("xw", function()
+	require("trouble").toggle("diagnostics")
+end, "Trouble: Workspace diagnostics")
+
+nmap_leader("xb", function()
+	require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
+end, "Trouble: Buffer diagnostics")
+
+-- trouble next/prev + jump
+nmap("]t", function()
+	require("trouble").next({ skip_groups = true, jump = true })
+end, "Trouble: Next")
+
+nmap("[t", function()
+	require("trouble").prev({ skip_groups = true, jump = true })
+end, "Trouble: Prev")
+
 -- keymaps
