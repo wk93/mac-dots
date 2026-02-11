@@ -32,6 +32,7 @@ _: [
   # "syncthing"
   "1password"
   # "rectangle"
+  "mhaeuser/mhaeuser/battery-toolkit"
 
   # Entertainment Tools - Examples (uncomment as needed)
   "spotify"

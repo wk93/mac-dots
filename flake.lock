@@ -124,6 +124,22 @@
         "type": "github"
       }
     },
+    "mhaeuser-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754982560,
+        "narHash": "sha256-tCD+gdISW8zZWydX6xLvWUr/goGX4jwtr8poGGE5KvI=",
+        "owner": "mhaeuser",
+        "repo": "homebrew-mhaeuser",
+        "rev": "fefa7acb6f19eedc2e40387e4a40a9d64cf78a13",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mhaeuser",
+        "repo": "homebrew-mhaeuser",
+        "type": "github"
+      }
+    },
     "nix-homebrew": {
       "inputs": {
         "brew-src": "brew-src"
@@ -182,6 +198,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "mhaeuser-tap": "mhaeuser-tap",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2"
       }
