@@ -23,8 +23,8 @@ _: [
   # Communication Tools - Examples (uncomment as needed)
   "readdle-spark"
   "telegram"
+  "notion"
   # "discord"
-  # "notion"
   # "slack"
   # "zoom"
 
