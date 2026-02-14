@@ -23,6 +23,9 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,6 +49,7 @@
     disko,
     #taps
     mhaeuser-tap,
+    ...
   } @ inputs: let
     user = "wojtek";
     linuxSystems = ["x86_64-linux" "aarch64-linux"];
