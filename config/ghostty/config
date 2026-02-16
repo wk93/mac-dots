@@ -1,5 +1,10 @@
 theme = Catppuccin Macchiato
 font-family = TX-02
 font-size = 16
-adjust-cell-height = "15%"
+shell-integration-features = no-cursor,sudo,no-title
+adjust-cell-height = 35%
 
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 2
+
+window-colorspace = "display-p3"
