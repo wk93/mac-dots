@@ -59,8 +59,8 @@ with pkgs; [
   bun
   cocoapods
   # go
-  # rustc
-  # cargo
+  rustup
+
   # openjdk
 
   # LSP
