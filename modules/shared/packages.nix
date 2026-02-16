@@ -54,6 +54,7 @@ with pkgs; [
   lazygit
   fzf
   direnv
+  wrangler
 
   # Programming languages and runtimes
   bun
