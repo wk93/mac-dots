@@ -43,8 +43,10 @@ local function ensure_blink_fuzzy_built()
 	end
 
 	if vim.fn.executable("cargo") ~= 1 then
-		vim.notify("blink.cmp: `cargo` not found in PATH. Please install Rust/Cargo and try again.",
-			vim.log.levels.ERROR)
+		vim.notify(
+			"blink.cmp: `cargo` not found in PATH. Please install Rust/Cargo and try again.",
+			vim.log.levels.ERROR
+		)
 		return
 	end
 
@@ -177,7 +179,6 @@ require("blink.cmp").setup({
 			},
 		},
 	},
-
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
