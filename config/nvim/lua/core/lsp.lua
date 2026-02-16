@@ -1,6 +1,9 @@
+-- /Users/wojtek/.config/nvim/lua/core/lsp.lua
+
 vim.lsp.enable({
 	"lua_ls",
 	"vtsls",
+	"tailwind",
 	"eslint",
 })
 

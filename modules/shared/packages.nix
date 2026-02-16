@@ -69,6 +69,7 @@ with pkgs; [
   lua-language-server
   stylua
   alejandra
+  tailwindcss-language-server
   vscode-langservers-extracted
 
   # Python packages
