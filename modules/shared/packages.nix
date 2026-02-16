@@ -69,6 +69,7 @@ with pkgs; [
   lua-language-server
   stylua
   alejandra
+  vscode-langservers-extracted
 
   # Python packages
   # python3

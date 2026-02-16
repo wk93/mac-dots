@@ -1,6 +1,7 @@
 vim.lsp.enable({
 	"lua_ls",
 	"vtsls",
+	"eslint",
 })
 
 vim.lsp.config("*", {
