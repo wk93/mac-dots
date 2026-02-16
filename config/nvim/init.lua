@@ -1,3 +1,3 @@
 require("config")
-require("core")
 require("plugins")
+require("core")

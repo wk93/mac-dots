@@ -1,5 +1,10 @@
 vim.lsp.enable({
 	"lua_ls",
+	"vtsls",
+})
+
+vim.lsp.config("*", {
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
 vim.diagnostic.config({
