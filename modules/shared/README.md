@@ -1,7 +1,7 @@
 ## Shared
-Much of the code running on MacOS or NixOS is actually found here.
+Much of the shared shell/editor tooling used on Darwin is found here.
 
-This configuration gets imported by both modules. Some configuration examples include `git`, `zsh`, `vim`, and `tmux`.
+This configuration gets imported by the Darwin module. Some configuration examples include `git`, `zsh`, `vim`, and `tmux`.
 
 ## Layout
 ```
