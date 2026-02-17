@@ -35,6 +35,14 @@
       url = "github:mhaeuser/homebrew-mhaeuser";
       flake = false;
     };
+    asmvik-tap = {
+      url = "github:asmvik/homebrew-formulae";
+      flake = false;
+    };
+    jackielii-tap = {
+      url = "github:jackielii/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -49,6 +57,8 @@
     disko,
     #taps
     mhaeuser-tap,
+    asmvik-tap,
+    jackielii-tap,
     ...
   } @ inputs: let
     user = "wojtek";
@@ -118,6 +128,8 @@
                   "homebrew/homebrew-bundle" = homebrew-bundle;
 
                   "mhaeuser/homebrew-mhaeuser" = mhaeuser-tap;
+                  "asmvik/homebrew-formulae" = asmvik-tap;
+                  "jackielii/homebrew-tap" = jackielii-tap;
                 };
                 mutableTaps = false;
                 autoMigrate = true;

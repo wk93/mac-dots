@@ -1,0 +1,37 @@
+# SUPER = Left Option (nie psuje AltGr -> polskie znaki)
+# przełączanie spaces 1..9
+lalt - 1 : /opt/homebrew/bin/yabai -m space --focus 1
+lalt - 2 : /opt/homebrew/bin/yabai -m space --focus 2
+lalt - 3 : /opt/homebrew/bin/yabai -m space --focus 3
+lalt - 4 : /opt/homebrew/bin/yabai -m space --focus 4
+lalt - 5 : /opt/homebrew/bin/yabai -m space --focus 5
+lalt - 6 : /opt/homebrew/bin/yabai -m space --focus 6
+lalt - 7 : /opt/homebrew/bin/yabai -m space --focus 7
+lalt - 8 : /opt/homebrew/bin/yabai -m space --focus 8
+lalt - 9 : /opt/homebrew/bin/yabai -m space --focus 9
+
+# przenieś okno do space 1..9 + przełącz się tam (jak w sway)
+shift + lalt - 1 : /opt/homebrew/bin/yabai -m window --space 1; /opt/homebrew/bin/yabai -m space --focus 1
+shift + lalt - 2 : /opt/homebrew/bin/yabai -m window --space 2; /opt/homebrew/bin/yabai -m space --focus 2
+shift + lalt - 3 : /opt/homebrew/bin/yabai -m window --space 3; /opt/homebrew/bin/yabai -m space --focus 3
+shift + lalt - 4 : /opt/homebrew/bin/yabai -m window --space 4; /opt/homebrew/bin/yabai -m space --focus 4
+shift + lalt - 5 : /opt/homebrew/bin/yabai -m window --space 5; /opt/homebrew/bin/yabai -m space --focus 5
+shift + lalt - 6 : /opt/homebrew/bin/yabai -m window --space 6; /opt/homebrew/bin/yabai -m space --focus 6
+shift + lalt - 7 : /opt/homebrew/bin/yabai -m window --space 7; /opt/homebrew/bin/yabai -m space --focus 7
+shift + lalt - 8 : /opt/homebrew/bin/yabai -m window --space 8; /opt/homebrew/bin/yabai -m space --focus 8
+shift + lalt - 9 : /opt/homebrew/bin/yabai -m window --space 9; /opt/homebrew/bin/yabai -m space --focus 9
+
+# start jak w sway: super+enter terminal, super+b browser, super+q kill
+lalt - return : /usr/bin/open -a Ghostty
+lalt - b      : /usr/bin/open -a "Firefox"     # albo Brave Browser / Safari
+lalt - q      : /opt/homebrew/bin/yabai -m window --close
+
+# rofi-like launcher (jeśli masz np. Raycast/Alfred)
+# lalt - space : open -a Raycast
+
+# (opcjonalnie) przełączanie focusu hjkl, ale tylko lewy alt (bez psucia ł)
+lalt - j : /opt/homebrew/bin/yabai -m window --focus south
+lalt - k : /opt/homebrew/bin/yabai -m window --focus north
+lalt - h : /opt/homebrew/bin/yabai -m window --focus west
+lalt - l : /opt/homebrew/bin/yabai -m window --focus east
+
