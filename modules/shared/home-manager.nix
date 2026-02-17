@@ -1,9 +1,13 @@
-{ config, pkgs, lib, ... }:
-
-let name = "Wojciech Kania";
-    user = "wojtek";
-    email = "wojtek@kania.sh"; in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  name = "Wojciech Kania";
+  user = "wojtek";
+  email = "wojtek@kania.sh";
+in {
   # Shared shell configuration
   zsh = {
     enable = true;
@@ -35,7 +39,6 @@ let name = "Wojciech Kania";
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Emacs is my editor
       export ALTERNATE_EDITOR=""
       export EDITOR="nvim"
       export VISUAL="nvim"
@@ -55,7 +58,7 @@ let name = "Wojciech Kania";
 
   git = {
     enable = true;
-    ignores = [ "*.swp" ];
+    ignores = ["*.swp"];
     lfs = {
       enable = true;
     };
@@ -68,7 +71,7 @@ let name = "Wojciech Kania";
       user.email = email;
       init.defaultBranch = "master";
       core = {
-	    editor = "vim";
+        editor = "vim";
         autocrlf = "input";
       };
       gpg.format = "ssh";
@@ -81,8 +84,8 @@ let name = "Wojciech Kania";
 
   vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vim-airline vim-airline-themes vim-startify vim-tmux-navigator ];
-    settings = { ignorecase = true; };
+    plugins = with pkgs.vimPlugins; [vim-airline vim-airline-themes vim-startify vim-tmux-navigator];
+    settings = {ignorecase = true;};
     extraConfig = ''
       "" General
       set number
@@ -187,24 +190,26 @@ let name = "Wojciech Kania";
 
       let g:airline_theme='bubblegum'
       let g:airline_powerline_fonts = 1
-      '';
-     };
+    '';
+  };
 
   ssh = {
     enable = true;
     enableDefaultConfig = false;
     includes = [
-      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
+      (
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux
         "/home/${user}/.ssh/config_external"
       )
-      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
+      (
+        lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
         "/Users/${user}/.ssh/config_external"
       )
     ];
     matchBlocks = {
       "*" = {
         # Set the default values we want to keep
-        sendEnv = [ "LANG" "LC_*" ];
+        sendEnv = ["LANG" "LC_*"];
         hashKnownHosts = true;
       };
       "github.com" = {
@@ -225,7 +230,7 @@ let name = "Wojciech Kania";
       {
         plugin = catppuccin;
         extraConfig = ''
-	   set -g @catppuccin_flavor 'macchiato'
+          set -g @catppuccin_flavor 'macchiato'
         '';
       }
       {
@@ -296,6 +301,6 @@ let name = "Wojciech Kania";
       bind-key -T copy-mode-vi 'C-k' select-pane -U
       bind-key -T copy-mode-vi 'C-l' select-pane -R
       bind-key -T copy-mode-vi 'C-\' select-pane -l
-      '';
-    };
+    '';
+  };
 }

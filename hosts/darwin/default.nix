@@ -14,12 +14,6 @@ in {
 
   nix.enable = false;
 
-  environment.systemPackages = with pkgs;
-    [
-      #emacs-unstable
-    ]
-    ++ (import ../../modules/shared/packages.nix {inherit pkgs;});
-
   system = {
     checks.verifyNixPath = false;
     primaryUser = user;
