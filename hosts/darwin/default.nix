@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-
-let user = "wojtek"; in
-
 {
+  config,
+  pkgs,
+  ...
+}: let
+  user = "wojtek";
+in {
   imports = [
     ../../modules/darwin/fonts.nix
     ../../modules/darwin/home-manager.nix
@@ -12,10 +14,11 @@ let user = "wojtek"; in
 
   nix.enable = false;
 
-
-  environment.systemPackages = with pkgs; [
-    #emacs-unstable
-  ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
+  environment.systemPackages = with pkgs;
+    [
+      #emacs-unstable
+    ]
+    ++ (import ../../modules/shared/packages.nix {inherit pkgs;});
 
   system = {
     checks.verifyNixPath = false;
@@ -41,7 +44,7 @@ let user = "wojtek"; in
       };
 
       dock = {
-        autohide = false;
+        autohide = true;
         show-recents = false;
         launchanim = true;
         orientation = "bottom";
