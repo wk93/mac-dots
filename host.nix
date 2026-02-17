@@ -6,9 +6,9 @@ args @ {
   user = "wojtek";
 in {
   imports = [
-    ../../modules/fonts.nix
-    ../../modules/home-manager.nix
-    ../../modules/keyboard-remap.nix
+    ./modules/fonts.nix
+    ./modules/home-manager.nix
+    ./modules/keyboard-remap.nix
   ];
 
   nixpkgs = {
@@ -22,7 +22,7 @@ in {
     overlays =
       # Apply each overlay found in the /overlays directory
       let
-        path = ../../overlays;
+        path = ./overlays;
       in
         with builtins;
           map (n: import (path + ("/" + n)))
