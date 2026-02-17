@@ -5,7 +5,9 @@
   home-manager,
   ...
 }: let
+  name = "Wojciech Kania";
   user = "wojtek";
+  email = "wojtek@kania.sh";
 in {
   imports = [
     ./dock
@@ -60,7 +62,7 @@ in {
       home.sessionVariables = {
         CHROME_EXECUTABLE = "/Applications/Chromium.app/Contents/MacOS/Chromium";
       };
-      programs = {} // import ../shared/home-manager.nix {inherit config pkgs lib;};
+      programs = import ./programs.nix {inherit config pkgs lib;};
 
       # Marked broken Oct 20, 2022 check later to remove this
       # https://github.com/nix-community/home-manager/issues/3344
