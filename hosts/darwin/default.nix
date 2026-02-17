@@ -1,4 +1,4 @@
-{
+args @ {
   config,
   pkgs,
   ...
@@ -6,11 +6,36 @@
   user = "wojtek";
 in {
   imports = [
-    ../../modules/darwin/fonts.nix
-    ../../modules/darwin/home-manager.nix
-    ../../modules/darwin/keyboard-remap.nix
-    ../../modules/shared
+    ../../modules/fonts.nix
+    ../../modules/home-manager.nix
+    ../../modules/keyboard-remap.nix
   ];
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowBroken = true;
+      allowInsecure = false;
+      allowUnsupportedSystem = true;
+    };
+
+    overlays =
+      # Apply each overlay found in the /overlays directory
+      let
+        path = ../../overlays;
+      in
+        with builtins;
+          map (n: import (path + ("/" + n)))
+          (filter (n:
+            match ".*\\.nix" n
+            != null
+            || pathExists (path + ("/" + n + "/default.nix")))
+          (attrNames (readDir path)))
+          ++ [
+            # overlays
+            args."neovim-nightly-overlay".overlays.default
+          ];
+  };
 
   nix.enable = false;
 
