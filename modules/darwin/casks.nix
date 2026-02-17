@@ -1,14 +1,11 @@
 _: [
   # Development Tools
-  # "homebrew/cask/docker"
-  # "visual-studio-code"
-  # "iterm2"
   "ghostty"
   "postman"
   "flutter"
   "android-studio"
   "chromium"
-  # "cursor"
+  "studio-3t-community"
 
   # Productivity Tools
   # "raycast"
