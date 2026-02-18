@@ -16,6 +16,10 @@
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
+
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;

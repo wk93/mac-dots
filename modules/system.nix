@@ -1,6 +1,7 @@
 {
   pkgs,
   user,
+  inputs,
   ...
 }: {
   users.users.${user} = {
@@ -10,7 +11,10 @@
     shell = pkgs.zsh;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [inputs.neovim-nightly-overlay.overlays.default];
+  };
 
   nix.enable = false;
 
