@@ -37,6 +37,7 @@ with pkgs; [
   fzf
   direnv
   wrangler
+  claude-code
 
   # Programming languages and runtimes
   nodejs_24
