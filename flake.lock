@@ -273,7 +273,24 @@
         "mhaeuser-tap": "mhaeuser-tap",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "wix-tap": "wix-tap"
+      }
+    },
+    "wix-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750234060,
+        "narHash": "sha256-mtfyNgLgmXpOUbctd0nIcq3hmLs0KB7Nw5e5Y3IkRlI=",
+        "owner": "wix",
+        "repo": "homebrew-brew",
+        "rev": "8f636f84541e08e850f455d7cffdfbd7ba305d3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wix",
+        "repo": "homebrew-brew",
+        "type": "github"
       }
     }
   },

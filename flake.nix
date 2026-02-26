@@ -45,6 +45,10 @@
       url = "github:jackielii/homebrew-tap";
       flake = false;
     };
+    wix-tap = {
+      url = "github:wix/homebrew-brew";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -79,6 +83,7 @@
               "mhaeuser/homebrew-mhaeuser" = inputs.mhaeuser-tap;
               "asmvik/homebrew-formulae" = inputs.asmvik-tap;
               "jackielii/homebrew-tap" = inputs.jackielii-tap;
+              "wix/homebrew-brew" = inputs.wix-tap;
             };
           };
         }
