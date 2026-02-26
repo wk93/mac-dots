@@ -23,9 +23,6 @@ with pkgs; [
   fd
   meslo-lgs-nf
 
-  # Node.js development tools
-  # nodejs_24
-
   # Text and terminal utilities
   jq
   ripgrep
@@ -42,6 +39,8 @@ with pkgs; [
   wrangler
 
   # Programming languages and runtimes
+  nodejs_24
+  nodePackages_latest."eas-cli"
   bun
   cocoapods
   rustup
