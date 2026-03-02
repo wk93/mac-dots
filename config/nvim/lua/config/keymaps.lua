@@ -18,3 +18,10 @@ vim.keymap.set("n", "<leader>H", "<cmd>vertical resize -5<cr>", { desc = "Resize
 vim.keymap.set("n", "<leader>L", "<cmd>vertical resize +5<cr>", { desc = "Resize right" })
 vim.keymap.set("n", "<leader>J", "<cmd>resize -5<cr>", { desc = "Resize down" })
 vim.keymap.set("n", "<leader>K", "<cmd>resize +5<cr>", { desc = "Resize up" })
+
+-- LSP
+vim.keymap.set("n", "<leader>li", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })

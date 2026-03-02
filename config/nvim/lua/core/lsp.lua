@@ -11,6 +11,9 @@ vim.lsp.config("*", {
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
+-- Inlay hints: toggle: <leader>li
+vim.lsp.inlay_hint.enable(false)
+
 vim.diagnostic.config({
 	virtual_lines = true,
 	-- virtual_text = true,
