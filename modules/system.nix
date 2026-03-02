@@ -66,8 +66,8 @@
       "jackielii/tap"
       "wix/brew"
     ];
-    casks = pkgs.callPackage ./casks.nix {};
-    brews = pkgs.callPackage ./brews.nix {};
+    casks = import ./casks.nix;
+    brews = import ./brews.nix;
     masApps = {
       "Spark Classic" = 1176895641;
     };
