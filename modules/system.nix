@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   user,
   inputs,
   ...
@@ -57,4 +58,23 @@
   };
 
   homebrew = import ./homebrew;
+
+  launchd.user.agents.tmux = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${pkgs.bash}/bin/bash"
+        "-l"
+        "-c"
+        "${pkgs.tmux}/bin/tmux new-session -d -s main"
+      ];
+      RunAtLoad = true;
+      KeepAlive = false;
+      EnvironmentVariables = {
+        PATH = lib.makeBinPath [
+          "/run/current-system/sw"
+          "/nix/var/nix/profiles/default"
+        ] + ":/usr/bin:/bin:/usr/sbin:/sbin";
+      };
+    };
+  };
 }

@@ -43,6 +43,10 @@
 
       alias diff=difft
       alias ls='ls --color=auto'
+
+      if [[ -z "$TMUX" && -n "$GHOSTTY_RESOURCES_DIR" && $- == *i* ]]; then
+        tmux new-session -A -s main
+      fi
     '';
   };
 
