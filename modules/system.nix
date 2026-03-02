@@ -58,8 +58,18 @@
 
   homebrew = {
     enable = true;
+    onActivation.cleanup = "uninstall";
+    taps = [
+      "homebrew/cask"
+      "mhaeuser/mhaeuser"
+      "asmvik/formulae"
+      "jackielii/tap"
+      "wix/brew"
+    ];
     casks = pkgs.callPackage ./casks.nix {};
     brews = pkgs.callPackage ./brews.nix {};
-    masApps = {};
+    masApps = {
+      "Spark Classic" = 1176895641;
+    };
   };
 }

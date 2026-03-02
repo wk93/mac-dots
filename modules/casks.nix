@@ -18,7 +18,6 @@ _: [
   "brave-browser"
 
   # Communication Tools - Examples (uncomment as needed)
-  "readdle-spark"
   "telegram"
   "notion"
   # "discord"
