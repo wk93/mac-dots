@@ -96,6 +96,24 @@
         plugin = catppuccin;
         extraConfig = ''
           set -g @catppuccin_flavor 'macchiato'
+          set -g @catppuccin_window_status_style "rounded"
+
+          # Window
+          set -g @catppuccin_window_text " #{window_name}"
+          set -g @catppuccin_window_current_text " #{window_name}"
+
+          # Session
+          set -g @catppuccin_session_icon " "
+          set -g @catppuccin_session_color "#{@thm_green}"
+
+          # Directory - basename only
+          set -g @catppuccin_directory_icon " "
+          set -g @catppuccin_directory_text "#{b:pane_current_path}"
+          set -g @catppuccin_directory_color "#{@thm_lavender}"
+
+          # Host
+          set -g @catppuccin_host_icon " "
+          set -g @catppuccin_host_color "#{@thm_blue}"
         '';
       }
       {
@@ -114,43 +132,41 @@
         '';
       }
     ];
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     prefix = "C-a";
     escapeTime = 10;
     historyLimit = 50000;
     extraConfig = ''
+      set -ag terminal-overrides ",xterm-256color:RGB"
+
+      set -g base-index 1
+      setw -g pane-base-index 1
+      set -g renumber-windows on
+      setw -g automatic-rename on
+      set -g automatic-rename-format "#{pane_current_command}"
+
       set -g focus-events on
       set -g mouse on
+
+      setw -g mode-keys vi
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
       unbind C-b
       unbind '"'
       unbind %
 
-      bind-key x split-window -v
-      bind-key v split-window -h
+      bind-key c new-window -c "#{pane_current_path}"
+      bind-key | split-window -h -c "#{pane_current_path}"
+      bind-key - split-window -v -c "#{pane_current_path}"
+      bind-key a last-window
 
-      bind-key -n M-k select-pane -U
-      bind-key -n M-h select-pane -L
-      bind-key -n M-j select-pane -D
-      bind-key -n M-l select-pane -R
-
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-
-      bind-key -T copy-mode-vi 'C-h' select-pane -L
-      bind-key -T copy-mode-vi 'C-j' select-pane -D
-      bind-key -T copy-mode-vi 'C-k' select-pane -U
-      bind-key -T copy-mode-vi 'C-l' select-pane -R
-      bind-key -T copy-mode-vi 'C-\' select-pane -l
+      # Status bar (po załadowaniu catppuccin)
+      set -g status-position top
+      set -g status-left "#{E:@catppuccin_status_session}"
+      set -g status-right "#{E:@catppuccin_status_directory}#{E:@catppuccin_status_host}"
+      set -g status-right-length 100
+      set -g status-left-length 100
     '';
   };
 }
