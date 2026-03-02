@@ -56,20 +56,5 @@
     };
   };
 
-  homebrew = {
-    enable = true;
-    onActivation.cleanup = "uninstall";
-    taps = [
-      "homebrew/cask"
-      "mhaeuser/mhaeuser"
-      "asmvik/formulae"
-      "jackielii/tap"
-      "wix/brew"
-    ];
-    casks = import ./casks.nix;
-    brews = import ./brews.nix;
-    masApps = {
-      "Spark Classic" = 1176895641;
-    };
-  };
+  homebrew = import ./homebrew;
 }
