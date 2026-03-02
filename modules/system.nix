@@ -65,7 +65,7 @@
         "${pkgs.bash}/bin/bash"
         "-l"
         "-c"
-        "${pkgs.tmux}/bin/tmux new-session -d -s main"
+        "cd ~ && ${pkgs.tmux}/bin/tmux new-session -d -s main"
       ];
       RunAtLoad = true;
       KeepAlive = false;

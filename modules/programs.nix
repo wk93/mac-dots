@@ -165,6 +165,15 @@
       bind-key - split-window -v -c "#{pane_current_path}"
       bind-key a last-window
 
+      # Resize panes (C-a H/J/K/L)
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
+
+      # Zoom/maximize pane (C-a m) - toggle
+      bind m resize-pane -Z
+
       # Status bar (po załadowaniu catppuccin)
       set -g status-position top
       set -g status-left "#{E:@catppuccin_status_session}"
