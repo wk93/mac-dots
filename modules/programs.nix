@@ -72,12 +72,8 @@
     settings = {
       user.name = name;
       user.email = email;
-      user.signingKey = "~/.ssh/keys/git_sign.pub";
       init.defaultBranch = "master";
-      core.editor = "vim";
-      core.autocrlf = "input";
-      gpg.format = "ssh";
-      commit.gpgSign = true;
+      core.editor = "nvim";
       pull.rebase = true;
       rebase.autoStash = true;
     };
