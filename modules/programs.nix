@@ -52,6 +52,7 @@
 
       alias diff=difft
       alias ls='ls --color=auto'
+      alias rebuild='darwin-rebuild switch --flake ~/.dotfiles'
 
       if [[ -z "$TMUX" && -n "$GHOSTTY_RESOURCES_DIR" && $- == *i* ]]; then
         tmux new-session -A -s main

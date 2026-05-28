@@ -19,6 +19,11 @@
 
   nix.enable = false;
 
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   system = {
     stateVersion = 5;
     primaryUser = user;
