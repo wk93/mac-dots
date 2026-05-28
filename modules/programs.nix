@@ -31,12 +31,21 @@
       export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
-      export PATH="$(echo /opt/homebrew/Caskroom/flutter/*/flutter/bin):$PATH"
 
-      export ANDROID_HOME="$HOME/Library/Android/sdk"
-      export ANDROID_SDK_ROOT="$ANDROID_HOME"
-      export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-      export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$JAVA_HOME/bin:$PATH"
+      for flutter_bin in /opt/homebrew/Caskroom/flutter/*/flutter/bin(N); do
+        export PATH="$flutter_bin:$PATH"
+      done
+
+      if [[ -d "$HOME/Library/Android/sdk" ]]; then
+        export ANDROID_HOME="$HOME/Library/Android/sdk"
+        export ANDROID_SDK_ROOT="$ANDROID_HOME"
+        export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+      fi
+
+      if [[ -d "/Applications/Android Studio.app/Contents/jbr/Contents/Home" ]]; then
+        export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+        export PATH="$JAVA_HOME/bin:$PATH"
+      fi
 
       export LANG="en_US.UTF-8"
       export LC_ALL="en_US.UTF-8"
@@ -47,7 +56,7 @@
       export VISUAL="nvim"
 
       shell() {
-        nix-shell '<nixpkgs>' -A "$1"
+        nix shell "nixpkgs#$1"
       }
 
       alias diff=difft
