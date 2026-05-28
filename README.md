@@ -31,7 +31,7 @@ Prosta konfiguracja **tylko dla macOS** oparta o:
 ```bash
 rebuild
 # lub
-darwin-rebuild switch --flake ~/.dotfiles
+sudo darwin-rebuild switch --flake ~/.dotfiles
 ```
 
 Sudo bez hasła przez Touch ID (`security.pam.services.sudo_local`).
