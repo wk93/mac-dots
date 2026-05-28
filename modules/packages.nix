@@ -1,25 +1,20 @@
 {pkgs}:
 with pkgs; [
-  # General packages for development and system management
-  alacritty
+  # General
   neovim
   bat
   coreutils
   killall
-  openssh
   wget
   zip
+  unzip
 
-  # Encryption and security tools
+  # Encryption
   age
   gnupg
   git-crypt
 
-  # Cloud-related tools and SDKs
-  # docker
-  # docker-compose
-
-  # Media-related packages
+  # Media
   fd
   meslo-lgs-nf
   ffmpeg
@@ -29,8 +24,6 @@ with pkgs; [
   mongosh
   ripgrep
   tree
-  tmux
-  unzip
 
   # Development tools
   curl
@@ -41,14 +34,14 @@ with pkgs; [
   wrangler
   claude-code
 
-  # Programming languages and runtimes
+  # Languages and runtimes
   nodejs_24
   eas-cli
   bun
   cocoapods
   rustup
 
-  # LSP
+  # LSP / formatters
   vtsls
   prettierd
   lua-language-server
@@ -56,8 +49,4 @@ with pkgs; [
   alejandra
   tailwindcss-language-server
   vscode-langservers-extracted
-
-  # Python packages
-  # python3
-  # virtualenv
 ]
