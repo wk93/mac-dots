@@ -31,6 +31,15 @@
       export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
+      export PATH="$(echo /opt/homebrew/Caskroom/flutter/*/flutter/bin):$PATH"
+
+      export ANDROID_HOME="$HOME/Library/Android/sdk"
+      export ANDROID_SDK_ROOT="$ANDROID_HOME"
+      export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+      export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$JAVA_HOME/bin:$PATH"
+
+      export LANG="en_US.UTF-8"
+      export LC_ALL="en_US.UTF-8"
 
       export HISTIGNORE="pwd:ls:cd"
       export ALTERNATE_EDITOR=""
@@ -55,6 +64,7 @@
     ignores = ["*.swp"];
     lfs.enable = true;
     signing = {
+      format = "ssh";
       key = "~/.ssh/keys/git_sign.pub";
       signByDefault = true;
     };
@@ -80,6 +90,12 @@
       "*" = {
         sendEnv = ["LANG" "LC_*"];
         hashKnownHosts = true;
+      };
+      "uk-vps" = {
+        hostname = "178.239.171.99";
+        user = "root";
+        identityFile = "~/.ssh/keys/oracle";
+        identitiesOnly = true;
       };
       "github.com" = {
         user = "git";
@@ -142,6 +158,7 @@
     historyLimit = 50000;
     extraConfig = ''
       set -ag terminal-overrides ",xterm-256color:RGB"
+      set -g default-command "env LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 $SHELL"
 
       set -g base-index 1
       setw -g pane-base-index 1
