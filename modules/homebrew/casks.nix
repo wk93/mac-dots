@@ -6,9 +6,12 @@
   "android-studio"
   "chromium"
   "studio-3t-community"
+  "cyberduck"
 
   # Productivity Tools
-  # "raycast"
+  "claude"
+  "cursor"
+  "figma"
 
   # Cloud Tools
   "dropbox"
@@ -20,14 +23,16 @@
   # Communication Tools - Examples (uncomment as needed)
   "telegram"
   "notion"
+  "slack"
+  "whatsapp"
+  "zoom"
   # "discord"
-  # "slack"
-  # "zoom"
 
   # Utility Tools - Examples (uncomment as needed)
   # "syncthing"
   "1password"
-  # "rectangle"
+  "tailscale-app"
+  "mullvad-vpn"
   "mhaeuser/mhaeuser/battery-toolkit"
 
   # Entertainment Tools - Examples (uncomment as needed)
