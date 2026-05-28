@@ -1,5 +1,5 @@
 {
-  description = "Minimal macOS configuration (nix-darwin + home-manager)";
+  description = "macOS dev workstation (nix-darwin + home-manager)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -20,6 +20,7 @@
   };
 
   outputs = inputs @ {
+    nixpkgs,
     darwin,
     home-manager,
     ...
@@ -38,5 +39,7 @@
         home-manager.darwinModules.home-manager
       ];
     };
+
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
   };
 }
