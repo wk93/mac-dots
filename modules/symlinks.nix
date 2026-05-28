@@ -14,4 +14,7 @@
 
   home.file.".config/skhd".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/skhd";
+
+  home.file."Library/Fonts/TX-02".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/secrets/fonts/TX-02";
 }
