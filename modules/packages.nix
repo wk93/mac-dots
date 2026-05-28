@@ -22,9 +22,11 @@ with pkgs; [
   # Media-related packages
   fd
   meslo-lgs-nf
+  ffmpeg
 
   # Text and terminal utilities
   jq
+  mongosh
   ripgrep
   tree
   tmux
@@ -35,13 +37,13 @@ with pkgs; [
   gh
   lazygit
   fzf
-  direnv
+  (direnv.overrideAttrs { doCheck = false; })
   wrangler
   claude-code
 
   # Programming languages and runtimes
   nodejs_24
-  nodePackages_latest."eas-cli"
+  eas-cli
   bun
   cocoapods
   rustup
