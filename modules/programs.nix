@@ -28,6 +28,10 @@
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       fi
 
+      if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+
       export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
@@ -101,6 +105,25 @@
         hostname = "178.239.171.99";
         user = "root";
         identityFile = "~/.ssh/keys/oracle";
+        identitiesOnly = true;
+      };
+      "oracle" = {
+        hostname = "89.168.111.137";
+        user = "wojtek";
+        identityFile = "~/.ssh/keys/oracle";
+        identitiesOnly = true;
+      };
+      "frog" = {
+        hostname = "frog01.mikr.us";
+        user = "frog";
+        port = 11088;
+        identityFile = "~/.ssh/keys/oracle";
+        identitiesOnly = true;
+      };
+      "soco" = {
+        hostname = "193.107.90.205";
+        user = "soco";
+        identityFile = "~/.ssh/keys/soco";
         identitiesOnly = true;
       };
       "github.com" = {
