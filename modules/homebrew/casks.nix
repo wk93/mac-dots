@@ -7,17 +7,19 @@
   "chromium"
   "studio-3t-community"
   "cyberduck"
+  "orbstack"
 
   # Productivity Tools
   "claude"
   "cursor"
   "figma"
+  "obsidian"
 
   # Cloud Tools
   "dropbox"
 
   # Browsers
-  # "google-chrome"
+  "google-chrome"
   "brave-browser"
 
   # Communication Tools - Examples (uncomment as needed)
@@ -31,6 +33,7 @@
   # Utility Tools - Examples (uncomment as needed)
   # "syncthing"
   "1password"
+  "karabiner-elements"
   "tailscale-app"
   "mullvad-vpn"
   "mhaeuser/mhaeuser/battery-toolkit"

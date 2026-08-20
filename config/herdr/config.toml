@@ -1,0 +1,52 @@
+# herdr config — zarządzane przez ~/.dotfiles (symlink z modules/symlinks.nix)
+# Pełny referencyjny config: `herdr --default-config`
+
+# Onboarding już przeszedł — trzymamy tu, żeby herdr nie przepisywał config.toml
+# (plik jest symlinkiem do repo).
+onboarding = false
+
+[keys]
+# Lustro tmux: prefix C-a zamiast domyślnego ctrl+b.
+# Reszta defaultów herdr już tmux-podobna: prefix+c (new tab), prefix+n/p
+# (next/prev), prefix+z (zoom), prefix+h/j/k/l (focus).
+prefix = "ctrl+a"
+
+# Splity jak w tmux: | pionowo (side-by-side), - poziomo (stacked).
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+
+# Rename tab (odpowiednik tmux `prefix ,` rename-window).
+rename_tab = "prefix+,"
+
+# Seamless nawigacja vim<->panel (plugin vim-herdr-navigation).
+# Wymaga: herdr plugin install paulbkim-dev/vim-herdr-navigation
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"
+
+[theme]
+name = "catppuccin"
+# Podążaj za light/dark hosta (Ghostty).
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"

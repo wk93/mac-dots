@@ -14,7 +14,13 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [inputs.neovim-nightly-overlay.overlays.default];
+    overlays = [
+      inputs.neovim-nightly-overlay.overlays.default
+      # herdr z osobnego, świeższego nixpkgs (patrz flake.nix input nixpkgs-herdr).
+      (_final: prev: {
+        inherit (inputs.nixpkgs-herdr.legacyPackages.${prev.stdenv.hostPlatform.system}) herdr;
+      })
+    ];
   };
 
   nix.enable = false;
@@ -67,58 +73,24 @@
 
   homebrew = import ./homebrew;
 
-  environment.etc."sudoers.d/yabai".text = ''
-    ${user} ALL = (root) NOPASSWD: /opt/homebrew/bin/yabai --load-sa
-  '';
-
-  launchd.user.agents.tmux = {
+  launchd.user.agents.herdr = {
     serviceConfig = {
       ProgramArguments = [
         "${pkgs.bash}/bin/bash"
         "-l"
         "-c"
-        "cd ~ && ${pkgs.tmux}/bin/tmux new-session -d -s main"
+        "cd ~ && ${pkgs.herdr}/bin/herdr server"
       ];
       RunAtLoad = true;
-      KeepAlive = false;
+      KeepAlive = true;
       EnvironmentVariables = {
-        PATH = lib.makeBinPath [
-          "/run/current-system/sw"
-          "/nix/var/nix/profiles/default"
-        ] + ":/usr/bin:/bin:/usr/sbin:/sbin";
+        PATH =
+          lib.makeBinPath [
+            "/run/current-system/sw"
+            "/nix/var/nix/profiles/default"
+          ]
+          + ":/usr/bin:/bin:/usr/sbin:/sbin";
       };
-    };
-  };
-
-  launchd.user.agents.yabai = {
-    serviceConfig = {
-      ProgramArguments = [
-        "/opt/homebrew/bin/yabai"
-        "-c"
-        "/Users/${user}/.config/yabai/yabairc"
-      ];
-      RunAtLoad = true;
-      KeepAlive = true;
-      ProcessType = "Interactive";
-      StandardOutPath = "/tmp/yabai.log";
-      StandardErrorPath = "/tmp/yabai.log";
-      EnvironmentVariables.PATH = "/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
-    };
-  };
-
-  launchd.user.agents.skhd = {
-    serviceConfig = {
-      ProgramArguments = [
-        "/opt/homebrew/bin/skhd"
-        "-c"
-        "/Users/${user}/.config/skhd/skhdrc"
-      ];
-      RunAtLoad = true;
-      KeepAlive = true;
-      ProcessType = "Interactive";
-      StandardOutPath = "/tmp/skhd.log";
-      StandardErrorPath = "/tmp/skhd.log";
-      EnvironmentVariables.PATH = "/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
     };
   };
 }

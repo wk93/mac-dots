@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Osobny, świeży nixpkgs używany WYŁĄCZNIE dla herdr (nie ma go jeszcze
+    # w przypiętym `nixpkgs`). Wstrzykiwany overlayem w modules/system.nix.
+    nixpkgs-herdr.url = "github:nixos/nixpkgs/nixos-unstable";
+
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +39,7 @@
       specialArgs = {inherit inputs user fullName email;};
       modules = [
         ./modules/system.nix
+        ./modules/aerospace.nix
         ./modules/home.nix
         home-manager.darwinModules.home-manager
       ];

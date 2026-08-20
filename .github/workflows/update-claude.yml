@@ -1,0 +1,35 @@
+name: update-claude
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+
+      - name: bump pin
+        run: ./scripts/update-claude.sh
+
+      - name: format
+        run: nix fmt -- modules/claude-code-pin.nix || true
+
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "[claude] bump to latest"
+          title: "[claude] bump to latest"
+          body: "Automated bump of `modules/claude-code-pin.nix` to upstream `latest`."
+          branch: auto/update-claude
+          delete-branch: true
