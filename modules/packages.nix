@@ -64,7 +64,6 @@ in
     eas-cli
     bun
     cocoapods
-    fastlane
     rustup
 
     # LSP / formatters

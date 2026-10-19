@@ -21,12 +21,37 @@
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
+
+    # Homebrew z Nixa (brew przypięty przez nix-homebrew → brew-src). Tapy
+    # niemutowalne: aktualizacja brew/casków = `nix flake update`.
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    mhaeuser-tap = {
+      url = "github:mhaeuser/homebrew-mhaeuser";
+      flake = false;
+    };
+    wix-tap = {
+      url = "github:wix/homebrew-brew";
+      flake = false;
+    };
+    render-tap = {
+      url = "github:render-oss/homebrew-render";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
     nixpkgs,
     darwin,
     home-manager,
+    nix-homebrew,
     ...
   }: let
     system = "aarch64-darwin";
@@ -42,6 +67,24 @@
         ./modules/aerospace.nix
         ./modules/home.nix
         home-manager.darwinModules.home-manager
+        nix-homebrew.darwinModules.nix-homebrew
+        ({config, ...}: {
+          nix-homebrew = {
+            inherit user;
+            enable = true;
+            mutableTaps = false;
+            autoMigrate = true;
+            taps = {
+              "homebrew/homebrew-core" = inputs.homebrew-core;
+              "homebrew/homebrew-cask" = inputs.homebrew-cask;
+              "mhaeuser/homebrew-mhaeuser" = inputs.mhaeuser-tap;
+              "wix/homebrew-brew" = inputs.wix-tap;
+              "render-oss/homebrew-render" = inputs.render-tap;
+            };
+          };
+          # Przy niemutowalnych tapach nix-darwin musi znać dokładnie te same.
+          homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+        })
       ];
     };
 
