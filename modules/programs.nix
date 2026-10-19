@@ -22,6 +22,11 @@
       }
     ];
 
+    # Przeniesione z ręcznego ~/.zprofile (dopisek OrbStack), który home-manager teraz generuje.
+    profileExtra = ''
+      source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+    '';
+
     initContent = lib.mkBefore ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -34,7 +39,7 @@
 
       export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
-      export PATH=$HOME/.local/share/bin:$PATH
+      export PATH=$HOME/.local/bin:$HOME/.local/share/bin:$PATH
 
       for flutter_bin in /opt/homebrew/Caskroom/flutter/*/flutter/bin(N); do
         export PATH="$flutter_bin:$PATH"
@@ -101,40 +106,62 @@
     enable = true;
     enableDefaultConfig = false;
     includes = ["/Users/${user}/.ssh/config_external"];
-    matchBlocks = {
+    settings = {
       "*" = {
-        sendEnv = ["LANG" "LC_*"];
-        hashKnownHosts = true;
+        SendEnv = ["LANG" "LC_*"];
+        HashKnownHosts = true;
+      };
+      "ovh" = {
+        HostName = "146.59.105.147";
+        User = "ubuntu";
+        IdentityFile = "~/.ssh/keys/ovh";
+        IdentitiesOnly = true;
+      };
+      # Tunel do panelu Stalwarta: ssh -fN ovh-panel, potem http://localhost:8080
+      # Panel nie jest wystawiony publicznie - tylko przez ten tunel.
+      "ovh-panel" = {
+        HostName = "146.59.105.147";
+        User = "ubuntu";
+        IdentityFile = "~/.ssh/keys/ovh";
+        IdentitiesOnly = true;
+        LocalForward = "8080 127.0.0.1:8080";
       };
       "uk-vps" = {
-        hostname = "178.239.171.99";
-        user = "root";
-        identityFile = "~/.ssh/keys/oracle";
-        identitiesOnly = true;
+        HostName = "178.239.171.99";
+        User = "root";
+        IdentityFile = "~/.ssh/keys/oracle";
+        IdentitiesOnly = true;
       };
       "oracle" = {
-        hostname = "89.168.111.137";
-        user = "wojtek";
-        identityFile = "~/.ssh/keys/oracle";
-        identitiesOnly = true;
+        HostName = "89.168.111.137";
+        User = "wojtek";
+        IdentityFile = "~/.ssh/keys/oracle";
+        IdentitiesOnly = true;
       };
       "frog" = {
-        hostname = "frog01.mikr.us";
-        user = "frog";
-        port = 11088;
-        identityFile = "~/.ssh/keys/oracle";
-        identitiesOnly = true;
+        HostName = "frog01.mikr.us";
+        User = "frog";
+        Port = 11088;
+        IdentityFile = "~/.ssh/keys/oracle";
+        IdentitiesOnly = true;
+      };
+      "frog-root" = {
+        HostName = "frog01.mikr.us";
+        User = "root";
+        Port = 11088;
+        IdentityFile = "~/.ssh/keys/oracle";
+        IdentitiesOnly = true;
       };
       "soco" = {
-        hostname = "193.107.90.205";
-        user = "soco";
-        identityFile = "~/.ssh/keys/soco";
-        identitiesOnly = true;
+        HostName = "193.107.90.205";
+        User = "soco";
+        IdentityFile = "~/.ssh/keys/soco";
+        IdentitiesOnly = true;
       };
       "github.com" = {
-        user = "git";
-        identityFile = "~/.ssh/keys/git_auth";
-        identitiesOnly = true;
+        User = "git";
+        IdentityFile = "~/.ssh/keys/git_auth";
+        IdentitiesOnly = true;
       };
     };
   };
