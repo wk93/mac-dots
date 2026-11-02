@@ -26,6 +26,7 @@ in
     herdr
     jq
     mongosh
+    mosh
     ripgrep
     tree
 

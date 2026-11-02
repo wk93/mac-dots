@@ -10,6 +10,10 @@
     home = "/Users/${user}";
     isHidden = false;
     shell = pkgs.zsh;
+    # Klucz per urządzenie klienckie (prywatny zostaje na urządzeniu).
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqWXVV1DBPYBYNM8Ob/Q2/I3cclDzZmVRwOYRwAy9sj T480"
+    ];
   };
 
   nixpkgs = {
@@ -20,12 +24,32 @@
       (_final: prev: {
         inherit (inputs.nixpkgs-herdr.legacyPackages.${prev.stdenv.hostPlatform.system}) herdr;
       })
+      # mosh 1.4.0 gubi SGR 2 (faint/dim) - np. wyszarzone podpowiedzi Claude Code wyglądają jak wpisany tekst.
+      (_final: prev: {
+        mosh = prev.mosh.overrideAttrs (old: {
+          patches = (old.patches or []) ++ [./patches/mosh-faint.patch];
+        });
+      })
     ];
   };
 
   nix.enable = false;
 
   programs.zsh.enable = true;
+
+  # mosh-server startuje przez nieinteraktywne ssh, bez initExtra - bez UTF-8 odmawia startu.
+  environment.variables.LANG = "en_US.UTF-8";
+
+  # Remote Login (sshd) dla mosh przez Tailscale - tylko klucze, tylko nasz user.
+  services.openssh = {
+    enable = true;
+    extraConfig = ''
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+      PermitRootLogin no
+      AllowUsers ${user}
+    '';
+  };
 
   security.pam.services.sudo_local = {
     touchIdAuth = true;
