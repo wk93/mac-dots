@@ -20,6 +20,7 @@ in
     fd
     meslo-lgs-nf
     ffmpeg
+    poppler-utils
 
     # Text and terminal utilities
     herdr
@@ -65,6 +66,7 @@ in
     bun
     cocoapods
     rustup
+    uv
 
     # LSP / formatters
     vtsls
