@@ -41,4 +41,6 @@
   # Entertainment Tools - Examples (uncomment as needed)
   "spotify"
   "vlc"
+
+  "gyorgysh/keepresso/keepresso"
 ]

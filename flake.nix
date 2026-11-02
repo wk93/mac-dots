@@ -45,6 +45,10 @@
       url = "github:render-oss/homebrew-render";
       flake = false;
     };
+    keepresso-tap = {
+      url = "github:gyorgysh/homebrew-keepresso";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -80,6 +84,7 @@
               "mhaeuser/homebrew-mhaeuser" = inputs.mhaeuser-tap;
               "wix/homebrew-brew" = inputs.wix-tap;
               "render-oss/homebrew-render" = inputs.render-tap;
+              "gyorgysh/homebrew-keepresso" = inputs.keepresso-tap;
             };
           };
           # Przy niemutowalnych tapach nix-darwin musi znać dokładnie te same.

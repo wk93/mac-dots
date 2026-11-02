@@ -111,6 +111,22 @@
         "type": "github"
       }
     },
+    "keepresso-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792006571,
+        "narHash": "sha256-kqoPLJyUMupPRZfhOHcQwIGvpiPoSJmhp3Wtc7O2+lk=",
+        "owner": "gyorgysh",
+        "repo": "homebrew-keepresso",
+        "rev": "ef756e1153e0255cfb7e46bd4bafbe63167fcacb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gyorgysh",
+        "repo": "homebrew-keepresso",
+        "type": "github"
+      }
+    },
     "mhaeuser-tap": {
       "flake": false,
       "locked": {
@@ -251,6 +267,7 @@
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "keepresso-tap": "keepresso-tap",
         "mhaeuser-tap": "mhaeuser-tap",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-homebrew": "nix-homebrew",
