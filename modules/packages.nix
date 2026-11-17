@@ -37,6 +37,7 @@ in
     fzf
     (direnv.overrideAttrs {doCheck = false;})
     wrangler
+    google-cloud-sdk
     (stdenvNoCC.mkDerivation rec {
       pname = "claude-code";
       version = claudePin.version;
