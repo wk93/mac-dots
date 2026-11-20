@@ -51,6 +51,46 @@
     '';
   };
 
+  # Tailscale + Mullvad: rozszerzenie Tailscale wiąże sockety z fizycznym interfejsem
+  # (omija tunel Mullvada → firewall Mullvada blokuje). Bind wg trasy = przez tunel.
+  environment.etc."tailscale/tailscaled-env.txt".text = ''
+    TS_BIND_TO_INTERFACE_BY_ROUTE=true
+  '';
+
+  # Firewall Mullvada (anchor "mullvad") blokuje tailnet 100.64.0.0/10.
+  # Anchory "com.apple/*" są ewaluowane przed "mullvad", więc pass quick tutaj wygrywa.
+  # Wychodzące do tailnetu: wszystko. Przychodzące z tailnetu: tylko ssh + mosh, reszta drop.
+  environment.etc."pf.anchors/tailscale".text = ''
+    pass out quick inet from any to 100.64.0.0/10 flags any keep state
+    pass out quick inet6 from any to fd7a:115c:a1e0::/48 flags any keep state
+    pass in quick inet proto tcp from 100.64.0.0/10 to any port 22 flags S/SA keep state
+    pass in quick inet6 proto tcp from fd7a:115c:a1e0::/48 to any port 22 flags S/SA keep state
+    pass in quick inet proto udp from 100.64.0.0/10 to any port 60000:61000 keep state
+    pass in quick inet6 proto udp from fd7a:115c:a1e0::/48 to any port 60000:61000 keep state
+    block drop in quick inet from 100.64.0.0/10 to any
+    block drop in quick inet6 from fd7a:115c:a1e0::/48 to any
+  '';
+
+  launchd.daemons.pf-tailscale.serviceConfig = {
+    ProgramArguments = ["/sbin/pfctl" "-a" "com.apple/tailscale" "-f" "/etc/pf.anchors/tailscale"];
+    RunAtLoad = true;
+    StartInterval = 300;
+  };
+
+  # Firewall aplikacyjny macOS: podpisane przez Apple (sshd) przechodzą, reszta pyta/blokuje.
+  networking.applicationFirewall = {
+    enable = true;
+    enableStealthMode = true;
+    allowSigned = true;
+    allowSignedApp = false;
+  };
+
+  # mosh-server z nixa nie jest podpisany przez Apple - jawny wyjątek (ścieżka zmienia się z wersją).
+  system.activationScripts.postActivation.text = ''
+    /usr/libexec/ApplicationFirewall/socketfilterfw --add ${pkgs.mosh}/bin/mosh-server >/dev/null
+    /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp ${pkgs.mosh}/bin/mosh-server >/dev/null
+  '';
+
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;
