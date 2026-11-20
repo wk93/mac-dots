@@ -5,4 +5,11 @@
   "fastlane"
   "wix/brew/applesimutils"
   "render-oss/render/render"
+  # rusty: bun run hotfix (cargo zigbuild na linux/amd64, asembler rav1e)
+  "zig"
+  "nasm"
+  # rusty: lint workflowów GitHub Actions
+  "actionlint"
+  # rusty: wspólny cache kompilacji Rusta między worktree (gate agentów)
+  "sccache"
 ]
